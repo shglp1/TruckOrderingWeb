@@ -120,3 +120,11 @@ To run the tests, open your terminal and type:
 python manage.py test truck_app
 ```
 You will see an `OK` message if everything is working correctly!
+
+## 8. Development Team
+This project was developed by UPMers: 
+- **Salem Shurrab**
+- **Hamidullah Abduljabar**
+- **S. Saifudin**
+- **ALOUH**
+- **F. FOAD**
