@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruckingPro Logistics</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            /* Primary Colors */
+            --primary: #F97316;
+            --primary-hover: #EA580C;
+            --primary-light: #FFEDD5;
+            
+            /* Neutral Colors */
+            --charcoal: #111827;
+            --dark-gray: #1F2937;
+            --medium-gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --border-gray: #E5E7EB;
+            --white: #FFFFFF;
+            
+            /* Backgrounds */
+            --bg-main: #F9FAFB;
+            
+            /* Status Colors */
+            --status-pending-bg: #FFEDD5;
+            --status-pending-text: #C2410C;
+            --status-progress-bg: #DBEAFE;
+            --status-progress-text: #1D4ED8;
+            --status-delivered-bg: #D1FAE5;
+            --status-delivered-text: #047857;
+            --status-cancelled-bg: #FEE2E2;
+            --status-cancelled-text: #B91C1C;
+
+            /* Borders & Shadows */
+            --border-radius-card: 16px;
+            --border-radius-btn: 10px;
+            --border-radius-input: 8px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--charcoal);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--charcoal);
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-gray);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .navbar-brand .icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .brand-text-dark { color: var(--charcoal); }
+        .brand-text-accent { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--medium-gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius-btn);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--charcoal);
+            border: 1px solid var(--border-gray);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-gray);
+            border-color: var(--medium-gray);
+        }
+
+        .btn-text {
+            background-color: transparent;
+            color: var(--medium-gray);
+            padding: 0;
+        }
+
+        .btn-text:hover {
+            color: var(--primary);
+        }
+
+        /* Layout */
+        .main-content {
+            flex: 1;
+            padding: 3rem 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--white);
+            border-radius: var(--border-radius-card);
+            border: 1px solid var(--border-gray);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-gray);
+            border-radius: var(--border-radius-input);
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            background-color: var(--white);
+            color: var(--charcoal);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .form-input::placeholder {
+            color: #9CA3AF;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--charcoal);
+            color: var(--white);
+            padding: 3rem 5%;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: #9CA3AF;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-highlight {
+            height: 3px;
+            width: 40px;
+            background-color: var(--primary);
+            margin: 0 auto 1.5rem;
+            border-radius: 2px;
+        }
+
+        /* Badges */
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .badge-pending { background-color: var(--status-pending-bg); color: var(--status-pending-text); }
+        .badge-in_progress { background-color: var(--status-progress-bg); color: var(--status-progress-text); }
+        .badge-delivered { background-color: var(--status-delivered-bg); color: var(--status-delivered-text); }
+        .badge-cancelled { background-color: var(--status-cancelled-bg); color: var(--status-cancelled-text); }
+
+        .alert {
+            padding: 1rem;
+            border-radius: var(--border-radius-card);
+            margin-bottom: 1.5rem;
+            background-color: var(--status-progress-bg);
+            color: var(--status-progress-text);
+            border: 1px solid #BFDBFE;
+        }
+        
+        /* Utility */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="navbar-brand">
+            <div class="icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+            </div>
+            <span class="brand-text-dark">TruckingPro</span><span class="brand-text-accent">Logistics</span>
+        </a>
+        <div class="nav-links">
+            {% if user.is_authenticated %}
+                <span style="color: var(--medium-gray); font-weight: 500; font-size: 0.95rem; margin-right: 1rem;">Hello, {{ user.username }}</span>
+                {% if user.is_staff %}
+                    <a href="/admin/" class="btn btn-primary">Admin Panel</a>
+                {% else %}
+                    <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+                    <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+                    <a href="{% url 'create_order' %}" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        New Order
+                    </a>
+                {% endif %}
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-text" style="font-weight: 500; font-size: 0.95rem;">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'home' %}" class="nav-link">Home</a>
+                <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-highlight"></div>
+            <p class="footer-text">© 2026 TruckingPro Logistics. All rights reserved.</p>
+            <p class="footer-text">This project was developed by UPMers: Salem Shurrab, Hamidullah Abduljabar, S. Saifudin, ALOUH, and F. FOAD.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

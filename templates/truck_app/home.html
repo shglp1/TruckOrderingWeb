@@ -1,0 +1,311 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* Hero Section */
+    .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 5rem 0;
+        background: linear-gradient(180deg, var(--white) 0%, var(--primary-light) 100%);
+        border-radius: var(--border-radius-card);
+        margin-top: -1rem;
+        margin-bottom: 4rem;
+        border: 1px solid var(--border-gray);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--charcoal);
+        margin-bottom: 1.5rem;
+        line-height: 1.15;
+        max-width: 800px;
+    }
+
+    .hero p {
+        font-size: 1.25rem;
+        color: var(--medium-gray);
+        max-width: 650px;
+        margin: 0 auto 2.5rem;
+    }
+    
+    .hero-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
+
+    .stat-card {
+        text-align: center;
+        padding: 2rem;
+        background-color: var(--white);
+        border: 1px solid var(--border-gray);
+        border-radius: var(--border-radius-card);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-text {
+        font-weight: 500;
+        color: var(--dark-gray);
+    }
+
+    /* Section Headers */
+    .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--charcoal);
+    }
+
+    .section-header p {
+        font-size: 1.1rem;
+        color: var(--medium-gray);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Features */
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
+
+    .feature-card {
+        padding: 2.5rem 2rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .feature-icon {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        background-color: var(--primary-light);
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+    }
+
+    .feature-card h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+        color: var(--medium-gray);
+        font-size: 0.95rem;
+    }
+
+    /* Process Section */
+    .process-section {
+        background-color: var(--white);
+        border: 1px solid var(--border-gray);
+        border-radius: var(--border-radius-card);
+        padding: 4rem 2rem;
+        margin-bottom: 5rem;
+    }
+
+    .process-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+        position: relative;
+    }
+
+    .step-card {
+        text-align: center;
+        position: relative;
+    }
+
+    .step-number {
+        width: 48px;
+        height: 48px;
+        background-color: var(--primary);
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0 auto 1.5rem;
+    }
+
+    .step-card h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .step-card p {
+        color: var(--medium-gray);
+        font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        text-align: center;
+        background-color: var(--charcoal);
+        color: var(--white);
+        padding: 5rem 2rem;
+        border-radius: var(--border-radius-card);
+    }
+
+    .cta-section h2 {
+        color: var(--white);
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta-section p {
+        color: #9CA3AF;
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+    }
+</style>
+
+<div class="hero">
+    <h1>Reliable Truck Ordering for Modern Logistics</h1>
+    <p>Book, manage, and track truck requests through a simple and secure web-based logistics platform.</p>
+    <div class="hero-actions">
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <a href="/admin/" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1.1rem;">Go to Admin Panel</a>
+            {% else %}
+                <a href="{% url 'dashboard' %}" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1.1rem;">View Dashboard</a>
+                <a href="{% url 'create_order' %}" class="btn btn-outline" style="padding: 0.8rem 2rem; font-size: 1.1rem; background: var(--white);">Create New Order</a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'register' %}" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1.1rem;">Create an Account</a>
+            <a href="{% url 'login' %}" class="btn btn-outline" style="padding: 0.8rem 2rem; font-size: 1.1rem; background: var(--white);">Login</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="stats-section">
+    <div class="stat-card">
+        <div class="stat-number">24/7</div>
+        <div class="stat-text">Order Visibility</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-text">Request Statuses</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">100%</div>
+        <div class="stat-text">Web-based Platform</div>
+    </div>
+</div>
+
+<div class="section-header">
+    <h2>Powerful Features for Your Logistics</h2>
+    <p>Everything you need to manage your shipments efficiently in one place.</p>
+</div>
+
+<div class="features">
+    <div class="card feature-card">
+        <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </div>
+        <h3>Streamlined Truck Requests</h3>
+        <p>Submit pickup, delivery, shipment size, weight, and schedule details through a clear digital form.</p>
+    </div>
+    <div class="card feature-card">
+        <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <h3>Order Status Tracking</h3>
+        <p>Monitor every request from pending to in progress, delivered, or cancelled.</p>
+    </div>
+    <div class="card feature-card">
+        <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h3>Admin Communication</h3>
+        <p>Receive admin comments and updates directly inside each order record.</p>
+    </div>
+    <div class="card feature-card">
+        <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        </div>
+        <h3>Centralized Dashboard</h3>
+        <p>View all submitted orders in one organized dashboard with clear status indicators.</p>
+    </div>
+</div>
+
+<div class="process-section">
+    <div class="section-header">
+        <h2>How It Works</h2>
+        <p>A simple 4-step process to get your shipments moving.</p>
+    </div>
+    <div class="process-steps">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h4>Create an Account</h4>
+            <p>Register quickly to access the TruckingPro platform.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h4>Submit Request</h4>
+            <p>Fill out the digital form with your shipment and schedule details.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h4>Admin Reviews</h4>
+            <p>Our logistics team reviews the order and updates its status.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <h4>Track Status</h4>
+            <p>Monitor progress and receive direct updates via your dashboard.</p>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section">
+    <h2>Ready to manage your truck requests more efficiently?</h2>
+    <p>Join TruckingPro Logistics and simplify your logistics today.</p>
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <a href="/admin/" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.15rem;">Go to Admin Panel</a>
+        {% else %}
+            <a href="{% url 'create_order' %}" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.15rem;">Create New Order</a>
+        {% endif %}
+    {% else %}
+        <a href="{% url 'register' %}" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.15rem;">Get Started Now</a>
+    {% endif %}
+</div>
+{% endblock %}
