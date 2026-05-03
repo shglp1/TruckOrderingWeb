@@ -68,6 +68,29 @@
         padding-top: 2rem;
         border-top: 1px solid var(--border-gray);
     }
+
+    /* Improved Date-Time Input Presentation */
+    .datetime-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .datetime-input-wrapper input {
+        padding-right: 2.5rem !important;
+    }
+
+    .calendar-icon {
+        position: absolute;
+        right: 12px;
+        color: var(--medium-gray);
+        pointer-events: none;
+        transition: color 0.2s;
+    }
+
+    .datetime-input-wrapper input:focus + .calendar-icon {
+        color: var(--primary);
+    }
 </style>
 
 <div class="form-container">
@@ -89,10 +112,20 @@
                     <div class="form-group">
                         <label class="form-label" for="{{ form.pickup_location.id_for_label }}">Pickup Location <span style="color: red;">*</span></label>
                         {{ form.pickup_location }}
+                        {% if form.pickup_location.errors %}
+                            <div class="error-msg" style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                                {{ form.pickup_location.errors|striptags }}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="{{ form.delivery_location.id_for_label }}">Delivery Location <span style="color: red;">*</span></label>
                         {{ form.delivery_location }}
+                        {% if form.delivery_location.errors %}
+                            <div class="error-msg" style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                                {{ form.delivery_location.errors|striptags }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -106,14 +139,29 @@
                     <div class="form-group">
                         <label class="form-label" for="{{ form.shipment_type.id_for_label }}">Shipment Type <span style="color: red;">*</span></label>
                         {{ form.shipment_type }}
+                        {% if form.shipment_type.errors %}
+                            <div class="error-msg" style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                                {{ form.shipment_type.errors|striptags }}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="{{ form.shipment_size.id_for_label }}">Shipment Size <span style="color: red;">*</span></label>
                         {{ form.shipment_size }}
+                        {% if form.shipment_size.errors %}
+                            <div class="error-msg" style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                                {{ form.shipment_size.errors|striptags }}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="{{ form.shipment_weight.id_for_label }}">Shipment Weight (kg) <span style="color: red;">*</span></label>
                         {{ form.shipment_weight }}
+                        {% if form.shipment_weight.errors %}
+                            <div class="error-msg" style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                                {{ form.shipment_weight.errors|striptags }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -126,11 +174,27 @@
                 <div class="grid-2-cols">
                     <div class="form-group">
                         <label class="form-label" for="{{ form.pickup_time.id_for_label }}">Pickup Date & Time <span style="color: red;">*</span></label>
-                        {{ form.pickup_time }}
+                        <div class="datetime-input-wrapper">
+                            {{ form.pickup_time }}
+                            <svg class="calendar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
+                        {% if form.pickup_time.errors %}
+                            <div class="error-msg" style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                                {{ form.pickup_time.errors|striptags }}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="{{ form.delivery_time.id_for_label }}">Delivery Date & Time (Optional)</label>
-                        {{ form.delivery_time }}
+                        <div class="datetime-input-wrapper">
+                            {{ form.delivery_time }}
+                            <svg class="calendar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
+                        {% if form.delivery_time.errors %}
+                            <div class="error-msg" style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                                {{ form.delivery_time.errors|striptags }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

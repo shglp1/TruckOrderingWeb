@@ -17,7 +17,7 @@ def register(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
-            login(request, user)
+            login(request, user, backend='truck_app.backends.EmailOrUsernameModelBackend')
             return redirect('dashboard')
     else:
         form = UserRegistrationForm()

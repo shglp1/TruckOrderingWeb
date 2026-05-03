@@ -80,8 +80,8 @@
         <form method="post">
             {% csrf_token %}
             {% if form.errors %}
-                <div class="alert" style="background-color: var(--status-cancelled-bg); color: var(--status-cancelled-text); border-color: #FECACA;">
-                    Your username and password didn't match. Please try again.
+                <div class="alert" style="background-color: #fee2e2; color: var(--status-cancelled-text); border: 1px solid #fecaca; padding: 0.8rem; border-radius: var(--border-radius-card); margin-bottom: 1.5rem; font-size: 0.9rem;">
+                    Invalid username/email or password. Please try again.
                 </div>
             {% endif %}
             

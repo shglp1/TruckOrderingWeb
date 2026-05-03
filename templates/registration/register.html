@@ -83,11 +83,17 @@
                 <div class="form-group">
                     <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }} <span style="color: red;">*</span></label>
                     {% if field.errors %}
-                        <div style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-bottom: 0.5rem;">
+                        <div style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-bottom: 0.5rem; background-color: #fee2e2; padding: 0.5rem; border-radius: 4px; border: 1px solid #fecaca;">
                             {{ field.errors|striptags }}
                         </div>
                     {% endif %}
-                    <input type="{% if 'password' in field.name %}password{% elif 'email' in field.name %}email{% else %}text{% endif %}" name="{{ field.name }}" class="form-input" id="{{ field.id_for_label }}" placeholder="Enter your {{ field.label|lower }}" required>
+                    <input type="{% if 'password' in field.name %}password{% elif 'email' in field.name %}email{% else %}text{% endif %}" 
+                           name="{{ field.name }}" 
+                           class="form-input {% if field.errors %}is-invalid{% endif %}" 
+                           id="{{ field.id_for_label }}" 
+                           value="{{ field.value|default_if_none:'' }}"
+                           placeholder="Enter your {{ field.label|lower }}" 
+                           required>
                 </div>
             {% endfor %}
             

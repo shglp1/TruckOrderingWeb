@@ -54,7 +54,9 @@
                 <label class="form-label" for="{{ form.first_name.id_for_label }}">First Name</label>
                 {{ form.first_name }}
                 {% if form.first_name.errors %}
-                    <div style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem;">{{ form.first_name.errors }}</div>
+                    <div style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                        {{ form.first_name.errors|striptags }}
+                    </div>
                 {% endif %}
             </div>
             
@@ -62,7 +64,9 @@
                 <label class="form-label" for="{{ form.last_name.id_for_label }}">Last Name</label>
                 {{ form.last_name }}
                 {% if form.last_name.errors %}
-                    <div style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem;">{{ form.last_name.errors }}</div>
+                    <div style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                        {{ form.last_name.errors|striptags }}
+                    </div>
                 {% endif %}
             </div>
             
@@ -70,7 +74,9 @@
                 <label class="form-label" for="{{ form.email.id_for_label }}">Email Address</label>
                 {{ form.email }}
                 {% if form.email.errors %}
-                    <div style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem;">{{ form.email.errors }}</div>
+                    <div style="color: var(--status-cancelled-text); font-size: 0.85rem; margin-top: 0.25rem; background-color: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid #fecaca;">
+                        {{ form.email.errors|striptags }}
+                    </div>
                 {% endif %}
             </div>
 
