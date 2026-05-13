@@ -46,6 +46,9 @@ Templates are the HTML files that the user sees.
 4. The **View** sends the data to the **Template**.
 5. The **Template** builds the final HTML page and sends it back to the user's browser.
 
+## PHP and MySQL Module
+In addition to the Django-based truck ordering system, this project includes a separate PHP and MySQL module located in the `php_mysql_module` folder. This module contains a Contact Admin form processed by PHP and stored in a MySQL database using prepared statements. It demonstrates PHP backend processing and MySQL database integration while keeping the main Django application unchanged.
+
 ## 5. Actors of the System
 There are two main actors in this system:
 1. **The Customer (User):** They can register, log in, create truck orders, update their profile, and view their dashboard.
