@@ -36,7 +36,9 @@ Views are the "brain" of the application. They take the user's request, talk to 
 
 ### Templates (The Frontend)
 Templates are the HTML files that the user sees. 
-- We designed the website using **Vanilla CSS** to make it look professional and corporate (orange and charcoal colors). 
+- **HTML5:** We use semantic HTML5 for the structure of all pages.
+- **Vanilla CSS:** We designed the website using custom CSS to make it look professional and corporate (orange and charcoal colors). 
+- **JavaScript (JS):** We use JavaScript for dynamic UI elements, such as a live session clock in the footer and real-time input validation in forms.
 - We use a `base.html` file to keep the navigation bar and footer consistent across all pages.
 
 ### How the Request is Moving?

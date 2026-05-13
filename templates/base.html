@@ -326,10 +326,28 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-highlight"></div>
-            <p class="footer-text">© 2026 TruckingPro Logistics. All rights reserved.</p>
+            <p class="footer-text">© <span id="django-year">2026</span> TruckingPro Logistics. All rights reserved.</p>
             <p class="footer-text">This project was developed by UPMers: Salem Shurrab, Hamidullah Abduljabar, S. Saifudin, ALOUH, and F. FOAD.</p>
+            <p id="js-clock" class="footer-text" style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7;"></p>
         </div>
     </footer>
+
+    <script>
+        // JavaScript for dynamic UI elements
+        document.getElementById('django-year').textContent = new Date().getFullYear();
+
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            const clockElement = document.getElementById('js-clock');
+            if (clockElement) {
+                clockElement.textContent = "Current Session Time: " + timeString;
+            }
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 
 </body>
 </html>

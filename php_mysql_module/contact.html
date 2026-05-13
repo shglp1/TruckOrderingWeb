@@ -110,9 +110,22 @@
         <button type="submit">Send Message</button>
     </form>
     <div class="footer-text">
-        &copy; 2026 TruckingPro Logistics - Support Module
+        &copy; <span id="current-year">2026</span> TruckingPro Logistics - Support Module
     </div>
 </div>
+
+<script>
+    // JavaScript to update the year and add a simple interaction
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const textarea = document.getElementById('message');
+    textarea.addEventListener('input', function() {
+        if (this.value.length > 500) {
+            this.value = this.value.substring(0, 500);
+        }
+        console.log("Characters remaining: " + (500 - this.value.length));
+    });
+</script>
 
 </body>
 </html>
