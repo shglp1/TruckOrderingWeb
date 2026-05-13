@@ -110,7 +110,77 @@ python manage.py runserver
 - **User Website:** Go to `http://127.0.0.1:8000/`
 - **Admin Panel:** Go to `http://127.0.0.1:8000/admin/`
 
-## 7. Setting Up the PHP and MySQL Module
+## 7. Running Django with XAMPP MySQL
+The application supports both SQLite (default) and MySQL. To use MySQL with XAMPP locally, follow these steps:
+
+### A. Start XAMPP
+- Open XAMPP Control Panel.
+- Start **Apache**.
+- Start **MySQL**.
+
+### B. Open phpMyAdmin
+- Go to `http://localhost/phpmyadmin`.
+- Create a new database named `truckingpro_db`.
+- Use `utf8mb4_general_ci` as the collation if possible.
+
+### C. Enable MySQL mode
+You need to set environment variables before running the application. In **PowerShell**, run:
+
+```powershell
+$env:USE_MYSQL="True"
+$env:MYSQL_DATABASE="truckingpro_db"
+$env:MYSQL_USER="root"
+$env:MYSQL_PASSWORD=""
+$env:MYSQL_HOST="127.0.0.1"
+$env:MYSQL_PORT="3306"
+```
+
+### D. Install Requirements
+Make sure you have the MySQL driver (`pymysql`) installed:
+```bash
+pip install -r requirements.txt
+```
+
+### E. Run Migrations
+This will create the necessary tables in your MySQL database:
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### F. Create Superuser (for MySQL)
+Since the database is new, you need a new admin account:
+```bash
+python manage.py createsuperuser
+```
+
+### G. Run Application
+```bash
+python manage.py runserver
+```
+
+### H. Open in Browser
+- Website: `http://127.0.0.1:8000/`
+
+**Notes:**
+- If `USE_MYSQL` is not set or is `False`, Django uses SQLite by default.
+- For MySQL mode, **do not** manually create Django tables using `database_schema.sql`. Use Django migrations as shown above.
+- `database_schema.sql` is provided as a reference and for the separate PHP module.
+
+## 8. Verifying the Active Database
+To verify which database is currently active, run the Django shell:
+```bash
+python manage.py shell
+```
+Then run these commands inside the shell:
+```python
+from django.conf import settings
+print(settings.DATABASES["default"]["ENGINE"])
+```
+- **SQLite output**: `django.db.backends.sqlite3`
+- **MySQL output**: `django.db.backends.mysql`
+
+## 9. Setting Up the PHP and MySQL Module
 To run the additional PHP module, follow these steps:
 
 1.  **Start MySQL**: Open XAMPP/WAMP Control Panel and start the MySQL service.
@@ -140,7 +210,7 @@ To quickly test the application, you can use these default accounts (you can log
   - Email: `user@example.com`
   - Password: `123456`
 
-## 8. Testing
+## 10. Testing
 We wrote automated unit tests to make sure the application works very well. We tested the models, the forms, and all the views.
 
 To run the tests, open your terminal and type:
@@ -149,7 +219,7 @@ python manage.py test truck_app
 ```
 You will see an `OK` message if everything is working correctly!
 
-## 9. Development Team
+## 11. Development Team
 This project was developed by UPMers: 
 - **Salem Shurrab**
 - **Hamidullah Abduljabar S. Saifudin**
