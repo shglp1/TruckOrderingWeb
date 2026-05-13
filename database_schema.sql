@@ -1,7 +1,3 @@
--- MySQL Compatible Database Schema for TruckingPro
--- This file is for reference and MySQL setup.
--- The main Django application uses SQLite by default.
-
 CREATE DATABASE IF NOT EXISTS truckingpro_db;
 USE truckingpro_db;
 
