@@ -57,8 +57,17 @@ There are two main actors in this system:
 ## 6. How to Set Up the Project
 If you want to open this project on your local device, follow these steps:
 
-**Prerequisites:**
-You need to install Python (version 3.8 or higher) on your computer.
+### Prerequisites
+- **Python (3.8 or higher)**: For the Django application.
+- **PHP Server (XAMPP/WAMP)**: For the PHP module.
+- **MySQL Database**: Required for the PHP module and optional for Django (if migrated).
+
+### Dependencies
+All required Python packages are listed in `requirements.txt`. Key dependencies include:
+- Django 5.x
+- sqlparse
+- asgiref
+- tzdata
 
 **Step 1: Open the Terminal**
 Open your terminal (Command Prompt, PowerShell, or bash) and navigate to the project folder.
@@ -101,6 +110,22 @@ python manage.py runserver
 - **User Website:** Go to `http://127.0.0.1:8000/`
 - **Admin Panel:** Go to `http://127.0.0.1:8000/admin/`
 
+## 7. Setting Up the PHP and MySQL Module
+To run the additional PHP module, follow these steps:
+
+1.  **Start MySQL**: Open XAMPP/WAMP Control Panel and start the MySQL service.
+2.  **Import Database**: 
+    - Open **phpMyAdmin** (`http://localhost/phpmyadmin`).
+    - Create a new database named `truckingpro_db`.
+    - Select the database, go to the **Import** tab, and upload `database_schema.sql` (found in the root directory).
+3.  **Run PHP Module**:
+    - Ensure your PHP server is running.
+    - If using XAMPP, place the project folder in `htdocs` or use the PHP built-in server:
+      ```bash
+      php -S localhost:8080 -t php_mysql_module/
+      ```
+    - Open `http://localhost:8080/contact.html` in your browser.
+
 **Test Accounts:**
 To quickly test the application, you can use these default accounts (you can log in using either the username or the email address):
 
@@ -115,7 +140,7 @@ To quickly test the application, you can use these default accounts (you can log
   - Email: `user@example.com`
   - Password: `123456`
 
-## 7. Testing
+## 8. Testing
 We wrote automated unit tests to make sure the application works very well. We tested the models, the forms, and all the views.
 
 To run the tests, open your terminal and type:
@@ -124,7 +149,7 @@ python manage.py test truck_app
 ```
 You will see an `OK` message if everything is working correctly!
 
-## 8. Development Team
+## 9. Development Team
 This project was developed by UPMers: 
 - **Salem Shurrab**
 - **Hamidullah Abduljabar S. Saifudin**
